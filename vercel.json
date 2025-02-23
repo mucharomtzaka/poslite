@@ -58,6 +58,13 @@
         "AWS_DEFAULT_REGION": "us-east-1",
         "AWS_BUCKET": "",
         "AWS_USE_PATH_STYLE_ENDPOINT": "false",
-        "VITE_APP_NAME": "PosLite"
+        "VITE_APP_NAME": "PosLite",
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+        "CACHE_DRIVER": "array"
     }
 }
