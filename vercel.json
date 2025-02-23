@@ -2,9 +2,10 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/*.php": {
-            "runtime": "vercel-php@0.6.1"
-        }
+        "api/index.php": { "runtime": "vercel-php@0.6.1" }
+    },
+    "github": {
+        "enabled": false
     },
     "routes": [
         {
