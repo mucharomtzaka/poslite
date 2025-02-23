@@ -32,11 +32,15 @@ return [
 
         'local' => [
             'driver' => 'local',
-            //'root' => storage_path('app/private'),
-            'root' => env('STORAGE_PATH', storage_path('app')),
+            'root' => storage_path('app'),
             'serve' => true,
             'throw' => false,
             'report' => false,
+        ],
+
+        'custom' => [
+            'driver' => 'local',
+            'root' => env('STORAGE_PATH', storage_path('app')),
         ],
 
         'public' => [

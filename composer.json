@@ -65,8 +65,7 @@
         ],
         "post-install-cmd": [
             "chgrp -R www-data storage bootstrap/cache",
-            "chmod -R ug+rwx storage bootstrap/cache",
-            "@php artisan storage:link"
+            "chmod -R ug+rwx storage bootstrap/cache"
         ]
     },
     "extra": {
