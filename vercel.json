@@ -16,7 +16,7 @@
         "APP_KEY": "base64:9CeQ7IJWvtR9uMGbVopOFNydFt3RAQIZGv8APuCWGxQ=",
         "APP_DEBUG": "true",
         "APP_TIMEZONE": "UTC",
-        "APP_URL": "http://poslite.vercel.app",
+        "APP_URL": "poslite-rho.vercel.app",
         "APP_LOCALE": "en",
         "APP_FALLBACK_LOCALE": "en",
         "APP_FAKER_LOCALE": "en_US",
