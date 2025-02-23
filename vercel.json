@@ -2,12 +2,15 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.6.1" }
-    },
-    "github": {
-        "enabled": false
+        "api/*.php": {
+            "runtime": "vercel-php@0.7.1"
+        }
     },
     "routes": [
+        {
+            "src": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|ttf|woff|woff2|eot|otf|webp|avif|txt))$",
+            "dest": "/public/$1"
+        },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
@@ -60,5 +63,6 @@
         "AWS_BUCKET": "",
         "AWS_USE_PATH_STYLE_ENDPOINT": "false",
         "VITE_APP_NAME": "PosLite"
-    }
+    },
+    "outputDirectory": "public"
 }
