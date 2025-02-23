@@ -7,5 +7,5 @@ use App\Http\Controllers\OrderPrintController;
 Route::get('/', function () {
     return redirect()->route('filament.admin.pages.dashboard');
 });
-// route print
+/// route print
 Route::get('/orders/{order}/print', [OrderPrintController::class, 'print'])->name('orders.print');
