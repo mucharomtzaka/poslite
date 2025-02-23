@@ -1,10 +1,21 @@
 {
     "version": 2,
     "framework": null,
-    "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.6.1" }
-    },
+    "builds": [
+        {
+            "src": "api/index.php",
+            "use": "@vercel/php"
+        },
+        {
+            "src": "server.js",
+            "use": "@vercel/node"
+        }
+    ],
     "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/server.js"
+        },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
@@ -56,6 +67,8 @@
         "AWS_DEFAULT_REGION": "us-east-1",
         "AWS_BUCKET": "",
         "AWS_USE_PATH_STYLE_ENDPOINT": "false",
-        "VITE_APP_NAME": "PosLite"
+        "VITE_APP_NAME": "PosLite",
+        "NODE_ENV": "production",
+        "PORT": "3000"
     }
 }
