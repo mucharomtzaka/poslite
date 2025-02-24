@@ -20,7 +20,8 @@
         "maatwebsite/excel": "^3.1",
         "spatie/laravel-sluggable": "^3.7",
         "tomatophp/filament-language-switcher": "^1.0",
-        "tomatophp/filament-translations": "^2.0"
+        "tomatophp/filament-translations": "^2.0",
+        "ext-pdo_pgsql": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
