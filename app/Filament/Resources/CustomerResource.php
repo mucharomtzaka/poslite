@@ -38,6 +38,7 @@ class CustomerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(null) 
             ->columns([
                 //
                 TextColumn::make('first_name')->sortable()->searchable(),

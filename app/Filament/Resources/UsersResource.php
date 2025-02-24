@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Services\SupabaseStorageService;
 
 class UsersResource extends Resource
 {
@@ -43,16 +44,13 @@ class UsersResource extends Resource
                                 ->dehydrated(fn ($state) => filled($state))
                                 ->revealable() // hide show password
                                 ->maxLength(255), // max char 255
-                FileUpload::make('avatar')
-                ->avatar()
-                ->image()
-                ->imageEditor()
-                ->circleCropper()
-                ->imageResizeMode('cover')
-                ->imageCropAspectRatio('16:9')
-                ->imageResizeTargetWidth('1920')
-                ->imageResizeTargetHeight('1080')
-                
+                FileUpload::make('file')->label('Avatar')
+                ->storeFileNamesIn('original_name')
+                ->maxSize(51200)
+                ->afterStateUpdated(fn ($state, callable $set) => 
+                    $set('avatar', app(SupabaseStorageService::class)->upload($state))
+                ),
+                Forms\Components\Hidden::make('avatar')
             ]);
     }
 
@@ -62,15 +60,19 @@ class UsersResource extends Resource
             ->recordUrl(null) 
             ->columns([
                 //
-                ImageColumn::make('avatar')->label('Avatar')->circular(),
+                ImageColumn::make('avatar')->label('Picture')->circular()
+                ->defaultImageUrl(url('/images/product-placeholder.jpg'))
+                ->getStateUsing(fn ($record) => app(SupabaseStorageService::class)->getFileUrl($record->avatar)),
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('email')->searchable(),
+                Tables\Columns\TextColumn::make('created_at'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

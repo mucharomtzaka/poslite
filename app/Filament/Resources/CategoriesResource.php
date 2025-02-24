@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Strings\Str;
 use Filament\Forms\Components\Grid;
+use App\Services\SupabaseStorageService;
 
 class CategoriesResource extends Resource
 {
@@ -31,21 +32,18 @@ class CategoriesResource extends Resource
     {
         return [
             Grid::make(1)->schema([
-                FileUpload::make('picture')
-                ->avatar()
-                ->image()
-                ->imageEditor()
-                ->circleCropper()
-                ->imageResizeMode('cover')
-                ->imageCropAspectRatio('16:9')
-                ->imageResizeTargetWidth('1920')
-                ->imageResizeTargetHeight('1080'), 
+                FileUpload::make('file')->label('Picture')
+                ->storeFileNamesIn('original_name')
+                ->maxSize(51200)
+                ->afterStateUpdated(fn ($state, callable $set) => 
+                    $set('picture', app(SupabaseStorageService::class)->upload($state))
+                ),
                 Forms\Components\TextInput::make('name')->unique(ignoreRecord: true)
                 ->required() // cannot empty
                 ->maxLength(255), 
                 Forms\Components\Textarea::make('description')->rows(5)->cols(20),
-            ])
-                
+                Forms\Components\Hidden::make('picture')
+            ])     
         ];
     }
 
@@ -59,9 +57,12 @@ class CategoriesResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->recordUrl(null) 
             ->columns([
                 //
-                ImageColumn::make('picture')->label('Picture')->circular()->defaultImageUrl(url('/images/product-placeholder.jpg')),
+                ImageColumn::make('picture')->label('Picture')->circular()
+                ->defaultImageUrl(url('/images/product-placeholder.jpg'))
+                ->getStateUsing(fn ($record) => app(SupabaseStorageService::class)->getFileUrl($record->picture)),
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('slug')->searchable(),
                 Tables\Columns\TextColumn::make('description')->limit(100),

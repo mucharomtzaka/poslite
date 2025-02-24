@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Services\SupabaseStorageService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        $this->app->singleton(SupabaseStorageService::class, function ($app) {
+             return new SupabaseStorageService();
+        });
     }
 
     /**
@@ -22,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
-       
+        
     }
 }

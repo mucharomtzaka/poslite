@@ -17,4 +17,9 @@ class CreateLocations extends CreateRecord
     protected function mutateFormDataBeforeSave(array $data): array{
         return $data;
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
