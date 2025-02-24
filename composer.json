@@ -12,6 +12,7 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "designthebox/barcode-field": "^0.0.6",
+        "doctrine/dbal": "^4.2",
         "eightynine/filament-reports": "^3.0",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.31",
