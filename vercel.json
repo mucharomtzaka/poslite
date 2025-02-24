@@ -1,16 +1,9 @@
 {
     "version": 2,
     "framework": null,
-    "builds": [
-        {
-            "src": "api/index.php",
-            "use": "vercel-php@0.7.1",
-            "config": {
-                "includeFiles": ["vendor/**"],
-                "phpExtensions": ["pdo_pgsql"]
-            }
-        }
-    ],
+    "functions": {
+        "api/index.php": { "runtime": "vercel-php@0.6.1" }
+    },
     "routes": [
         {
             "src": "/(.*)",
