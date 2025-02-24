@@ -29,18 +29,15 @@
         "APP_DEBUG": "false",
         "APP_TIMEZONE": "UTC",
         "APP_URL": "https://poslite-rho.vercel.app",
-
         "DB_CONNECTION": "pgsql",
         "DB_HOST": "aws-0-ap-southeast-1.pooler.supabase.com",
         "DB_PORT": "5432",
         "DB_DATABASE": "postgres",
         "DB_USERNAME": "postgres.khgjvaeezwsqtoiiozig",
         "DB_PASSWORD": "pteiIwTzu0f33NFr",
-
         "SESSION_DRIVER": "database",
         "SESSION_LIFETIME": "120",
         "CACHE_DRIVER": "database",
-
         "FILESYSTEM_DISK": "custom",
         "STORAGE_PATH": "/tmp"
     }
