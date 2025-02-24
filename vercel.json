@@ -2,7 +2,7 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.7.1" }
+        "api/index.php": { "runtime": "vercel-php@0.7.3" }
     },
     "routes": [
         {
@@ -16,7 +16,7 @@
         "APP_KEY": "base64:9CeQ7IJWvtR9uMGbVopOFNydFt3RAQIZGv8APuCWGxQ=",
         "APP_DEBUG": "false",
         "APP_TIMEZONE": "UTC",
-        "APP_URL": "https://xposlite.vercel.app",
+        "APP_URL": "https://poslitefilament.vercel.app",
         "DB_CONNECTION": "pgsql",
         "DB_URL": "postgres://postgres.khgjvaeezwsqtoiiozig:pteiIwTzu0f33NFr@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require&supa=base-pooler.x",
         "SESSION_DRIVER": "database",
