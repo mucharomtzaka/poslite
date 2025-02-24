@@ -28,7 +28,7 @@
         "APP_KEY": "base64:9CeQ7IJWvtR9uMGbVopOFNydFt3RAQIZGv8APuCWGxQ=",
         "APP_DEBUG": "false",
         "APP_TIMEZONE": "UTC",
-        "APP_URL": "https://poslite-rho.vercel.app",
+        "APP_URL": "https://poslite-rhox.vercel.app",
         "DB_CONNECTION": "pgsql",
         "DB_HOST": "aws-0-ap-southeast-1.pooler.supabase.com",
         "DB_PORT": "5432",
