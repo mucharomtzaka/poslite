@@ -6,6 +6,16 @@
             "runtime": "vercel-php@0.7.1"
         }
     },
+    "builds": [
+        {
+            "src": "api/index.php",
+            "use": "@vercel/php",
+            "config": {
+                "includeFiles": ["vendor/**"],
+                "phpExtensions": ["pdo_pgsql"]
+            }
+        }
+    ],
     "routes": [
         {
             "src": "/(.*)",
@@ -16,57 +26,22 @@
         "APP_NAME": "PosLite",
         "APP_ENV": "production",
         "APP_KEY": "base64:9CeQ7IJWvtR9uMGbVopOFNydFt3RAQIZGv8APuCWGxQ=",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false",
         "APP_TIMEZONE": "UTC",
-        "APP_URL": "poslite-rho.vercel.app",
-        "APP_LOCALE": "en",
-        "APP_FALLBACK_LOCALE": "en",
-        "APP_FAKER_LOCALE": "en_US",
-        "APP_MAINTENANCE_DRIVER": "file",
-        "PHP_CLI_SERVER_WORKERS": "4",
-        "BCRYPT_ROUNDS": "12",
-        "LOG_CHANNEL": "stderr",
-        "LOG_STACK": "stderr",
-        "LOG_DEPRECATIONS_CHANNEL": "null",
-        "LOG_LEVEL": "debug",
+        "APP_URL": "https://poslite-rho.vercel.app",
+
         "DB_CONNECTION": "pgsql",
-        "DB_URL": "postgres://postgres.khgjvaeezwsqtoiiozig:pteiIwTzu0f33NFr@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require&supa=base-pooler.x",
-        "SESSION_DRIVER": "cookie",
+        "DB_HOST": "aws-0-ap-southeast-1.pooler.supabase.com",
+        "DB_PORT": "5432",
+        "DB_DATABASE": "postgres",
+        "DB_USERNAME": "postgres.khgjvaeezwsqtoiiozig",
+        "DB_PASSWORD": "pteiIwTzu0f33NFr",
+
+        "SESSION_DRIVER": "database",
         "SESSION_LIFETIME": "120",
-        "SESSION_ENCRYPT": "false",
-        "SESSION_PATH": "/",
-        "SESSION_DOMAIN": "null",
-        "BROADCAST_CONNECTION": "log",
+        "CACHE_DRIVER": "database",
+
         "FILESYSTEM_DISK": "custom",
-        "QUEUE_CONNECTION": "database",
-        "CACHE_STORE": "database",
-        "CACHE_PREFIX": "",
-        "MEMCACHED_HOST": "127.0.0.1",
-        "REDIS_CLIENT": "phpredis",
-        "REDIS_HOST": "127.0.0.1",
-        "REDIS_PASSWORD": "null",
-        "REDIS_PORT": "6379",
-        "MAIL_MAILER": "log",
-        "MAIL_SCHEME": "null",
-        "MAIL_HOST": "127.0.0.1",
-        "MAIL_PORT": "2525",
-        "MAIL_USERNAME": "null",
-        "MAIL_PASSWORD": "null",
-        "MAIL_FROM_ADDRESS": "hello@example.com",
-        "MAIL_FROM_NAME": "PosLite",
-        "AWS_ACCESS_KEY_ID": "",
-        "AWS_SECRET_ACCESS_KEY": "",
-        "AWS_DEFAULT_REGION": "us-east-1",
-        "AWS_BUCKET": "",
-        "AWS_USE_PATH_STYLE_ENDPOINT": "false",
-        "VITE_APP_NAME": "PosLite",
-        "APP_CONFIG_CACHE": "/tmp/config.php",
-        "APP_EVENTS_CACHE": "/tmp/events.php",
-        "APP_PACKAGES_CACHE": "/tmp/packages.php",
-        "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_SERVICES_CACHE": "/tmp/services.php",
-        "VIEW_COMPILED_PATH": "/tmp/views",
-        "CACHE_DRIVER": "array",
         "STORAGE_PATH": "/tmp"
     }
 }
