@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory_logs', function (Blueprint $table) {
-            $table->id('log_id');
-            $table->foreignId('purchase_transaction_id')->nullable();
+        Schema::create('product_locations', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('product_id')->nullable();
-            $table->integer('quantity_change');
-            $table->string('reason');
-            $table->foreignId('logged_by')->nullable();
-            $table->dateTime('log_date');
+            $table->foreignId('location_id')->nullable(); 
+            $table->integer('stock_quantity')->default(0); // Quantity stored at this location
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory_logs');
+        Schema::dropIfExists('product_locations');
     }
 };

@@ -41,7 +41,7 @@ class OrderResource extends Resource
                 Forms\Components\Select::make('customer_id')
                     ->label('Customer')
                     ->relationship('customer', 'first_name')
-                    ->required()->searchable(['first_name', 'email'])
+                    ->required()->searchable(['first_name', 'email'])->default(1)
                     ->createOptionForm([
                         Forms\Components\TextInput::make('first_name')->required(),
                         Forms\Components\TextInput::make('last_name')->required(),
@@ -49,6 +49,10 @@ class OrderResource extends Resource
                         Forms\Components\TextInput::make('phone')->required(),
                         Forms\Components\Textarea::make('address')->rows(5)->cols(20),
                     ]),
+                    Forms\Components\Select::make('location_id')
+                    ->label('Location')
+                    ->relationship('location', 'name')
+                    ->required()->default(1),
                     Section::make()->schema([
                         Forms\Components\Repeater::make('items')
                         ->relationship()
@@ -90,7 +94,7 @@ class OrderResource extends Resource
                         ->columns(3)
                     ]),
                     Section::make() ->schema([
-                        Placeholder::make('total_amount')
+                    Placeholder::make('total_amount')
                     ->label('Total Amount')
                     ->content(function (callable $get,callable $set) {
                         // Calculate total from all items

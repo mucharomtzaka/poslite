@@ -20,6 +20,7 @@ use App\Filament\Exports\ProductExporter;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Support\Enums\ActionSize;
 
 class ProductResource extends Resource
 {
@@ -38,23 +39,23 @@ class ProductResource extends Resource
                 Forms\Components\Select::make('category_id')
                     ->label('Category')
                     ->relationship('category', 'name')
-                    ->required()
+                    ->required()->default(1)
                     ->createOptionForm(CategoriesResource::getFormSchema())
                     ->createOptionModalHeading('Create Category')
                     ->searchable(),
                 Forms\Components\Select::make('supplier_id')
                     ->label('Supplier')
                     ->relationship('supplier', 'name')
-                    ->required()
+                    ->default(1)
                     ->createOptionForm(SupplierResource::getFormSchema())
                     ->createOptionModalHeading('Create Supplier')
                     ->searchable(),
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('price')->numeric()->required(),
-                Forms\Components\TextInput::make('cost_price')->numeric()->required(),
+                Forms\Components\TextInput::make('name')->label('Name Product')->required(),
+                Forms\Components\TextInput::make('price_sale')->label('Price Sale')->numeric()->required()->default(0),
+                Forms\Components\TextInput::make('price_purchase')->label('Price Purchase')->numeric()->required()->default(0),
                 Forms\Components\TextInput::make('sku')->label('SKU')->required(),
                 BarcodeInput::make('barcode')->label('Barcode')->nullable(),
-                Forms\Components\TextInput::make('stock_quantity')->label('Stock Qty')->numeric()->required()->disabledOn('edit'),
+                Forms\Components\TextInput::make('stock_quantity')->label('Stock Qty')->numeric()->required()->default(0)->disabledOn('edit'),
                 Forms\Components\TextInput::make('min_stock_level')->label('Stock Min')->numeric()->required()->default(0),
                 Forms\Components\Textarea::make('description')->rows(5)->cols(20)->required(),
             ]);
@@ -72,14 +73,14 @@ class ProductResource extends Resource
             ])
             ->columns([
                 //
-                TextColumn::make('sku'),
-                TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('price')->money('idr'),
-                TextColumn::make('cost_price')->money('idr'),
-                TextColumn::make('stock_quantity'),
-                TextColumn::make('min_stock_level'),
+                TextColumn::make('sku')->label('SKU'),
+                TextColumn::make('name')->label('Name Product')->sortable()->searchable(),
+                TextColumn::make('price_sale')->label('Price Sale')->money('idr'),
+                TextColumn::make('price_purchase')->label('Price Purchase')->money('idr'),
+                TextColumn::make('stock_quantity')->default(0),
+                TextColumn::make('min_stock_level')->default(0),
                 TextColumn::make('category.name')->label('Category'),
-                TextColumn::make('supplier.name')->label('Supplier'),
+                TextColumn::make('supplier.name')->label('Supplier')->default('-'),
                 Tables\Columns\TextColumn::make('description')->limit(100),
             ])
             ->filters([
@@ -87,11 +88,17 @@ class ProductResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ActionGroup::make([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
+                ])->label('More actions')
+                ->icon('heroicon-m-ellipsis-vertical')
+                 ->size(ActionSize::Small)
+                 ->color('primary')
+                 ->button(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

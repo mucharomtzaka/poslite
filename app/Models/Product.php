@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
@@ -19,8 +20,8 @@ class Product extends Model
         'category_id',
         'supplier_id',
         'name',
-        'price',
-        'cost_price',
+        'price_sale',
+        'price_purchase',
         'sku',
         'barcode',
         'stock_quantity',
@@ -29,8 +30,8 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'price' => 'decimal:2',
-        'cost_price' => 'decimal:2',
+        'price_sale' => 'decimal:2',
+        'price_purchase' => 'decimal:2',
         'stock_quantity' => 'integer',
         'min_stock_level' => 'integer',
     ];
@@ -42,6 +43,6 @@ class Product extends Model
 
     public function supplier()
     {
-        return $this->belongsTo(Supplier::class, 'supplier_id');
+        return $this->HasOne(Supplier::class, 'supplier_id');
     }
 }

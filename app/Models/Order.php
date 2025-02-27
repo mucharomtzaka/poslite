@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\hasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Locations;
 
 class Order extends Model
 {
@@ -19,7 +20,8 @@ class Order extends Model
         'order_date',
         'total_amount',
         'status',
-        'total_price'
+        'total_price',
+        'location_id'
     ];
 
     public function customer(): BelongsTo
@@ -41,4 +43,9 @@ class Order extends Model
     {
         return $this->hasOne(Payment::class, 'order_id');
     } 
+
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Locations::class, 'location_id');
+    }
 }

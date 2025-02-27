@@ -62,7 +62,11 @@ class CategoriesResource extends Resource
                 //
                 ImageColumn::make('picture')->label('Picture')->circular()
                 ->defaultImageUrl(url('/images/product-placeholder.jpg'))
-                ->getStateUsing(fn ($record) => app(SupabaseStorageService::class)->getFileUrl($record->picture)),
+                ->getStateUsing(fn ($record) => 
+                    !empty($record->picture) 
+                        ? app(SupabaseStorageService::class)->getFileUrl($record->picture) 
+                        : url('/images/product-placeholder.jpg')
+                ),
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('slug')->searchable(),
                 Tables\Columns\TextColumn::make('description')->limit(100),
