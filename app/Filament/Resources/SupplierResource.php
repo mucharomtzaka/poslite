@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Select;
 
 class SupplierResource extends Resource
 {
@@ -26,6 +27,11 @@ class SupplierResource extends Resource
     public static function getFormSchema(): array
     {
         return [
+            Select::make('default_location_id')
+            ->label('Default Location')
+            ->relationship('defaultLocation', 'name')
+            ->searchable()
+            ->nullable(),
             Forms\Components\TextInput::make('name')->required()->unique(ignoreRecord: true),
             Forms\Components\TextInput::make('contact_name')->required(),
             Forms\Components\TextInput::make('email')->email()->required(),

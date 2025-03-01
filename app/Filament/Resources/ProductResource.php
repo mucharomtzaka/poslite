@@ -55,7 +55,7 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('price_purchase')->label('Price Purchase')->numeric()->required()->default(0),
                 Forms\Components\TextInput::make('sku')->label('SKU')->required(),
                 BarcodeInput::make('barcode')->label('Barcode')->nullable(),
-                Forms\Components\TextInput::make('stock_quantity')->label('Stock Qty')->numeric()->required()->default(0)->disabledOn('edit'),
+                Forms\Components\TextInput::make('stock_quantity')->label('Stock Qty')->numeric()->disabled()->default(0),
                 Forms\Components\TextInput::make('min_stock_level')->label('Stock Min')->numeric()->required()->default(0),
                 Forms\Components\Textarea::make('description')->rows(5)->cols(20)->required(),
             ]);

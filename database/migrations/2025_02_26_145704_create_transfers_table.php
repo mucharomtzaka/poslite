@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->nullable();
-            $table->string('from_location');
-            $table->string('to_location');
+            $table->foreignId('from_location')->nullable();
+            $table->foreignId('to_location')->nullable();
             $table->integer('quantity');
             $table->timestamp('transfer_date')->useCurrent();
             $table->string('reason')->default('Stock Transfer');
