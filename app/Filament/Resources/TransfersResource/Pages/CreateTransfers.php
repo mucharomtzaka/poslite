@@ -20,7 +20,7 @@ class CreateTransfers extends CreateRecord
 
     protected function afterCreate(): void{
         $transfer = $this->record;
-        if ($transfer->from_location === 'master_stock') {
+        if ($transfer->from_location === 0) {
             // Deduct from Product Master Stock
             $product = Product::find($transfer->product_id);
             if ($product && $product->stock_quantity >= $transfer->quantity) {
@@ -40,13 +40,13 @@ class CreateTransfers extends CreateRecord
         // Add stock to the new location
         $toLocation = ProductLocations::firstOrCreate([
             'product_id' => $transfer->product_id,
-            'location' => $transfer->to_location,
+            'location_id' => $transfer->to_location,
         ], [
             'stock_quantity' => 0,
         ]);
 
         $toLocation->increment('stock_quantity', $transfer->quantity);
-        
+
         $inventoryLogs[] = [
             'product_id' => $transfer->product_id,
             'change_type' => 'Transfer',

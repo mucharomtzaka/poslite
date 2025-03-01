@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TransfersResource\Pages;
 use App\Filament\Resources\TransfersResource\RelationManagers;
 use App\Models\Transfers;
-use App\Models\ProductLocations;
+use App\Models\Locations;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -33,15 +33,15 @@ class TransfersResource extends Resource
                 Select::make('from_location')
                     ->options(
                         ['0' => 'Master Stock'] +
-                        ProductLocations::with('location')->get()
-                            ->mapWithKeys(fn($pl) => [$pl->location_id => $pl->location->name ?? 'Unknown Location'])
+                        Locations::query()->get()
+                            ->mapWithKeys(fn($pl) => [$pl->location_id => $pl->name ?? 'Unknown Location'])
                             ->toArray()
                     )
                     ->required(),
                 Select::make('to_location')
                     ->options(
-                        ProductLocations::with('location')->get()
-                            ->mapWithKeys(fn($pl) => [$pl->location_id => $pl->location->name ?? 'Unknown Location'])
+                        Locations::query()->get()
+                            ->mapWithKeys(fn($pl) => [$pl->location_id => $pl->name ?? 'Unknown Location'])
                             ->toArray()
                     ),
 
